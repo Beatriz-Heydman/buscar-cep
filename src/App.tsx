@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import axios from "axios";
+import { useState } from "react";
+
+type Adress = {
+  cep: string;
+  logradouro: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
+};
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [adressData, setAdressdata] = useState<Adress | null>(null); //Guarda o valor do retorno do endereço
+  const [errorSearch, setErrorSearch] = useState<string | null>(null); //Guarda o valor que retorna um erro
+
+  const [zipCodeInput, setZipCodeInput] = useState("");
+
+  async function zipCodeSearch() {
+    try {
+      const response = await axios.get(
+        `https://viacep.com.br/ws/${zipCodeInput}/json/`,
+      );
+      setAdressdata(response.data);
+    } catch {
+      setErrorSearch("CEP inválido");
+      console.log(errorSearch);
+    }
+  }
+  console.log(adressData);
+  console.log(zipCodeInput);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ padding: "2rem", display: "flex", gap: "0.5rem" }}>
+      <input
+        type="number"
+        value={zipCodeInput}
+        onChange={(event) => {
+          setZipCodeInput(event?.currentTarget.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          zipCodeSearch();
+        }}
+      >
+        Buscar
+      </button>
+    </div>
+  );
 }
 
-export default App
+export default App;
