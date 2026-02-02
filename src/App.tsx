@@ -1,31 +1,18 @@
-import axios from "axios";
+// Libs
 import { useState } from "react";
 
-type Adress = {
-  cep: string;
-  logradouro: string;
-  bairro: string;
-  localidade: string;
-  uf: string;
-};
+// Requests
+import { zipCodeSearch } from "./requests/get/get-zip";
+
+// Types
+import type { Adress } from "./requests/get/get-zip/types";
 
 function App() {
-  const [adressData, setAdressdata] = useState<Adress | null>(null); //Guarda o valor do retorno do endereço
-  const [errorSearch, setErrorSearch] = useState<string | null>(null); //Guarda o valor que retorna um erro
+  const [adressData, setAdressdata] = useState<Adress>(); //Guarda o valor do retorno do endereço
+  // const [errorSearch, setErrorSearch] = useState(""); //Guarda o valor que retorna um erro
 
   const [zipCodeInput, setZipCodeInput] = useState("");
 
-  async function zipCodeSearch() {
-    try {
-      const response = await axios.get(
-        `https://viacep.com.br/ws/${zipCodeInput}/json/`,
-      );
-      setAdressdata(response.data);
-    } catch {
-      setErrorSearch("CEP inválido");
-      console.log(errorSearch);
-    }
-  }
   console.log(adressData);
   console.log(zipCodeInput);
 
@@ -39,8 +26,12 @@ function App() {
         }}
       />
       <button
-        onClick={() => {
-          zipCodeSearch();
+        onClick={async () => {
+          const response = await zipCodeSearch(zipCodeInput);
+
+          if (response) {
+            setAdressdata(response);
+          }
         }}
       >
         Buscar
