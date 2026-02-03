@@ -19,10 +19,19 @@ function App() {
   return (
     <div style={{ padding: "2rem", display: "flex", gap: "0.5rem" }}>
       <input
-        type="number"
-        value={zipCodeInput}
+        type="text"
+        maxLength={9}
         onChange={(event) => {
-          setZipCodeInput(event?.currentTarget.value);
+          const value = event?.currentTarget.value;
+          event.currentTarget.value = value.replace(/[^0-9&-]/g, "");
+          setZipCodeInput(value);
+
+          if (value.length === 5) {
+            event.currentTarget.value = value + "-";
+          }
+          if (value.slice(5) === "-") {
+            event.currentTarget.value = value.replace("-", "");
+          }
         }}
       />
       <button
