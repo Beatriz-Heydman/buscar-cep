@@ -1,4 +1,4 @@
-export type flexProps = {
+export type FlexProps = {
   gap?: string;
   flexWrap?: "wrap" | "nowrap";
   direction?: "row" | "column";
