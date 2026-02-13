@@ -12,16 +12,16 @@ export const StyledButton = styled.button`
   border: 2px solid #5754be;
   background: linear-gradient(to top, #3330a2, #6765e8);
   box-shadow:
-    inset -10px 5px 3px -8px rgba(255, 255, 255, 0.3),
-    inset 10px -5px 3px -8px rgba(255, 255, 255, 0.3);
+    inset -10px 6px 3px -8px rgba(255, 255, 255, 0.3),
+    inset 10px -6px 3px -8px rgba(255, 255, 255, 0.3);
   transition: all ease 0.3s;
   cursor: pointer;
 
   &:hover {
     scale: 0.99;
     box-shadow:
-      inset -10px -5px 3px -8px rgba(255, 255, 255, 0.395),
-      inset 10px 5px 3px -8px rgba(255, 255, 255, 0.393);
+      inset -10px -7px 3px -8px rgba(255, 255, 255, 0.395),
+      inset 10px 7px 3px -8px rgba(255, 255, 255, 0.393);
     background: linear-gradient(to top, #2d2a8d, #6361d7);
   }
 
