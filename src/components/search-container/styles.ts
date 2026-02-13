@@ -7,7 +7,7 @@ export const StyledSearchContainer = styled.div`
   padding: 1.5rem 2.5rem;
   display: flex;
   gap: 2rem;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   background-color: #cce1ff8c;
@@ -18,9 +18,9 @@ export const StyledSearchContainer = styled.div`
   position: relative;
 
   .map-search_image {
-    width: 350px;
-    height: 250px;
+    width: 280px;
+    height: 200px;
     position: absolute;
-    top: -150px;
+    top: -100px;
   }
 `;
