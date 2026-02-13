@@ -9,5 +9,5 @@ export const Typography = styled.label<TypographyProps>`
   font-weight: ${({ fontWeight = "500" }) => fontWeight};
   font-family: ${({ fontFamily = "Poppins" }) => fontFamily};
   line-height: ${({ lineHeight = "normal" }) => lineHeight};
-  color: ${({ color = "#fff" }) => color};
+  color: ${({ color = "#2d234d" }) => color};
 `;
