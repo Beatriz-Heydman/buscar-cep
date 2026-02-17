@@ -61,36 +61,74 @@ function App() {
           src="./public/assets/images/map-search.png"
           alt=""
         />
-        <Typography fontSize="42px" fontWeight="600" color="#5a459e">
+        <Typography
+          fontSize="42px"
+          fontWeight="600"
+          color="#5a459e"
+          style={{ paddingTop: "2.5rem" }}
+        >
           Buscar CEP
         </Typography>
 
-        <Flex gap="0.5rem" style={{ width: "100%" }}>
+        <Flex gap="0.5rem" style={{ width: "100%", padding: "0 2rem" }}>
           <Input type="text" placeholder="Digite o CEP" />
           <Button>Buscar</Button>
         </Flex>
 
         <div className="dividing deshed-horizontal"></div>
 
-        <Flex gap="1.5rem" style={{ width: "100%", height: "fit-content" }}>
+        <Flex
+          gap="1.5rem"
+          style={{ width: "100%", height: "fit-content", padding: "0 2rem" }}
+        >
           <Flex direction="column" gap="1rem" style={{ width: "100%" }}>
-            <Flex gap="0.5rem" direction="column" style={{ width: "100%" }}>
-              <Typography>Endereço:</Typography>
-              <Typography>Praça da Sé</Typography>
+            <Flex
+              alignItems="flex-start"
+              justifyContent="center"
+              gap="0.5rem"
+              direction="column"
+              style={{ width: "100%" }}
+            >
+              <Typography fontSize="1.25rem" fontWeight="600" color="#5a459e">
+                Endereço:
+              </Typography>
+              <Typography fontSize="1.10rem" fontWeight="500">
+                Praça da Sé
+              </Typography>
             </Flex>
 
             <div className="dividing line"></div>
 
-            <Flex gap="0.5rem" direction="column" style={{ width: "100%" }}>
-              <Typography>Bairro:</Typography>
-              <Typography>Sé</Typography>
+            <Flex
+              alignItems="flex-start"
+              justifyContent="center"
+              gap="0.5rem"
+              direction="column"
+              style={{ width: "100%" }}
+            >
+              <Typography fontSize="1.25rem" fontWeight="600" color="#5a459e">
+                Bairro:
+              </Typography>
+              <Typography fontSize="1.10rem" fontWeight="500">
+                Sé
+              </Typography>
             </Flex>
 
             <div className="dividing line"></div>
 
-            <Flex gap="0.5rem" direction="column" style={{ width: "100%" }}>
-              <Typography>Cidade:</Typography>
-              <Typography>São Paulo - SP</Typography>
+            <Flex
+              alignItems="flex-start"
+              justifyContent="center"
+              gap="0.5rem"
+              direction="column"
+              style={{ width: "100%" }}
+            >
+              <Typography fontSize="1.25rem" fontWeight="600" color="#5a459e">
+                Cidade:
+              </Typography>
+              <Typography fontSize="1.10rem" fontWeight="500">
+                São Paulo - SP
+              </Typography>
             </Flex>
           </Flex>
 
