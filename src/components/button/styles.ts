@@ -3,6 +3,10 @@ import styled from "styled-components";
 
 export const StyledButton = styled.button`
   width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.75rem 1.25rem;
   border-radius: 0.75rem;
   font-size: 18px;
