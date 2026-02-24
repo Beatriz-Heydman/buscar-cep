@@ -1,4 +1,5 @@
 export type Adress = {
+  erro: string;
   cep?: string;
   logradouro?: string;
   bairro?: string;
