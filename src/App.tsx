@@ -1,5 +1,6 @@
 // Libs
-// import { useState } from "react";
+import { useState } from "react";
+import { BiSolidMap } from "react-icons/bi";
 
 // Components
 import { Button } from "./components/button";
@@ -9,51 +10,21 @@ import { SearchContainer } from "./components/search-container";
 import { Typography } from "./components/typography";
 
 // Requests
-// import { zipCodeSearch } from "./requests/get/get-zip";
+import { zipCodeSearch } from "./requests/get/get-zip";
 
 // Types
-// import type { Adress } from "./requests/get/get-zip/types";
+import type { Adress } from "./requests/get/get-zip/types";
 
 function App() {
-  // const [adressData, setAdressdata] = useState<Adress>(); //Guarda o valor do retorno do endereço
-  // // const [errorSearch, setErrorSearch] = useState(""); //Guarda o valor que retorna um erro
+  const [adressData, setAdressdata] = useState<Adress>(); //Guarda o valor do retorno do endereço
+  const [errorSearch, setErrorSearch] = useState(""); //Guarda o valor que retorna um erro
 
-  // const [zipCodeInput, setZipCodeInput] = useState("");
+  const [zipCodeInput, setZipCodeInput] = useState("");
 
-  // console.log(adressData);
-  // console.log(zipCodeInput);
+  console.log(adressData?.erro);
+  console.log(adressData);
 
   return (
-    // <div style={{ padding: "2rem", display: "flex", gap: "0.5rem" }}>
-    //   <input
-    //     type="text"
-    //     maxLength={9}
-    //     onChange={(event) => {
-    //       const value = event?.currentTarget.value;
-    //       event.currentTarget.value = value.replace(/[^0-9&-]/g, "");
-    //       setZipCodeInput(value);
-
-    //       if (value.length === 5) {
-    //         event.currentTarget.value = value + "-";
-    //       }
-    //       if (value.slice(5) === "-") {
-    //         event.currentTarget.value = value.replace("-", "");
-    //       }
-    //     }}
-    //   />
-    //   <button
-    //     onClick={async () => {
-    //       const response = await zipCodeSearch(zipCodeInput);
-
-    //       if (response) {
-    //         setAdressdata(response);
-    //       }
-    //     }}
-    //   >
-    //     Buscar
-    //   </button>
-
-    // </div>
     <div className="background_image">
       <SearchContainer>
         <img
@@ -71,77 +42,147 @@ function App() {
         </Typography>
 
         <Flex gap="0.5rem" style={{ width: "100%", padding: "0 2rem" }}>
-          <Input type="text" placeholder="Digite o CEP" />
-          <Button>Buscar</Button>
+          <Input
+            type="text"
+            placeholder="Digite o CEP"
+            maxLength={9}
+            onChange={(event) => {
+              const value = event?.currentTarget.value;
+              event.currentTarget.value = value.replace(/[^0-9&-]/g, "");
+              setZipCodeInput(value);
+
+              if (value.length === 5) {
+                event.currentTarget.value = value + "-";
+              }
+              if (value.slice(5) === "-") {
+                event.currentTarget.value = value.replace("-", "");
+              }
+            }}
+          />
+
+          <Button
+            onClick={async () => {
+              const response = await zipCodeSearch(zipCodeInput, () => {
+                setErrorSearch(errorSearch);
+              });
+
+              if (response) {
+                setAdressdata(response);
+              }
+            }}
+          >
+            Buscar
+          </Button>
         </Flex>
 
         <div className="dividing deshed-horizontal"></div>
+        {adressData ? (
+          <Flex
+            gap="1.5rem"
+            style={{ width: "100%", height: "fit-content", padding: "0 2rem" }}
+          >
+            <Flex direction="column" gap="1rem" style={{ width: "100%" }}>
+              <Flex
+                alignItems="flex-start"
+                justifyContent="center"
+                gap="0.5rem"
+                direction="column"
+                style={{ width: "100%" }}
+              >
+                <Typography fontSize="1.25rem" fontWeight="600" color="#5a459e">
+                  Endereço:
+                </Typography>
+                <Typography fontSize="1.10rem" fontWeight="500">
+                  {adressData?.logradouro}
+                </Typography>
+              </Flex>
 
-        <Flex
-          gap="1.5rem"
-          style={{ width: "100%", height: "fit-content", padding: "0 2rem" }}
-        >
-          <Flex direction="column" gap="1rem" style={{ width: "100%" }}>
-            <Flex
-              alignItems="flex-start"
-              justifyContent="center"
-              gap="0.5rem"
-              direction="column"
-              style={{ width: "100%" }}
-            >
-              <Typography fontSize="1.25rem" fontWeight="600" color="#5a459e">
-                Endereço:
-              </Typography>
-              <Typography fontSize="1.10rem" fontWeight="500">
-                Praça da Sé
-              </Typography>
+              <div className="dividing line"></div>
+
+              <Flex
+                alignItems="flex-start"
+                justifyContent="center"
+                gap="0.5rem"
+                direction="column"
+                style={{ width: "100%" }}
+              >
+                <Typography fontSize="1.25rem" fontWeight="600" color="#5a459e">
+                  Bairro:
+                </Typography>
+                <Typography fontSize="1.10rem" fontWeight="500">
+                  {adressData?.bairro}
+                </Typography>
+              </Flex>
+
+              <div className="dividing line"></div>
+
+              <Flex
+                alignItems="flex-start"
+                justifyContent="center"
+                gap="0.5rem"
+                direction="column"
+                style={{ width: "100%" }}
+              >
+                <Typography fontSize="1.25rem" fontWeight="600" color="#5a459e">
+                  Cidade:
+                </Typography>
+                <Typography fontSize="1.10rem" fontWeight="500">
+                  {adressData?.localidade} - {adressData?.uf}
+                </Typography>
+              </Flex>
             </Flex>
 
-            <div className="dividing line"></div>
+            <div className="deshed-vertically"></div>
 
             <Flex
-              alignItems="flex-start"
+              alignItems="center"
               justifyContent="center"
-              gap="0.5rem"
+              gap="1rem"
               direction="column"
               style={{ width: "100%" }}
             >
-              <Typography fontSize="1.25rem" fontWeight="600" color="#5a459e">
-                Bairro:
+              <Typography
+                fontSize="1.25rem"
+                fontWeight="600"
+                color="#5a459e"
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "flex-start",
+                }}
+              >
+                Localização:
               </Typography>
-              <Typography fontSize="1.10rem" fontWeight="500">
-                Sé
-              </Typography>
+              <img className="maps_image" src="" alt="imagem" />
+              <Button style={{ width: "100%" }}>
+                <BiSolidMap size={23} />
+                <Typography color="#f2f2f2">Abrir no Google Maps</Typography>
+              </Button>
             </Flex>
-
-            <div className="dividing line"></div>
+          </Flex>
+        ) : (
+          <Flex justifyContent="center" alignItems="center" direction="column">
+            <img
+              className="file-box_image"
+              src="../public/assets/images/file-box.png"
+              alt=""
+            />
 
             <Flex
-              alignItems="flex-start"
               justifyContent="center"
-              gap="0.5rem"
+              alignItems="center"
               direction="column"
-              style={{ width: "100%" }}
+              gap="0.5rem"
             >
-              <Typography fontSize="1.25rem" fontWeight="600" color="#5a459e">
-                Cidade:
+              <Typography color="#397eba" fontSize="1.2rem" fontWeight="600">
+                Seu resultado aparecerá aqui!
               </Typography>
-              <Typography fontSize="1.10rem" fontWeight="500">
-                São Paulo - SP
+              <Typography color="#397eba" fontSize="1rem" fontWeight="400">
+                Digite um CEP no campo acima para buscar informações.
               </Typography>
             </Flex>
           </Flex>
-
-          <div className="deshed-vertically"></div>
-
-          <Flex direction="column" style={{ width: "100%" }}>
-            <Typography> Localização:</Typography>
-            <img src="" alt="imagem" />
-            <Button>
-              <Typography>Abrir no Google Maps</Typography>
-            </Button>
-          </Flex>
-        </Flex>
+        )}
       </SearchContainer>
     </div>
   );
