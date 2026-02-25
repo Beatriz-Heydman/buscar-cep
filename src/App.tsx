@@ -1,6 +1,7 @@
 // Libs
 import { useState } from "react";
 import { BiSolidMap } from "react-icons/bi";
+import { ToastContainer, toast } from "react-toastify";
 
 // Components
 import { Button } from "./components/button";
@@ -21,11 +22,58 @@ function App() {
 
   const [zipCodeInput, setZipCodeInput] = useState("");
 
+  const notifyError = () =>
+    toast.error(
+      <>
+        CEP inválido!
+        <br />
+        Certifique-se de que está correto e tente novamente.
+      </>,
+    );
+
+  const notifyWarning = () =>
+    toast.warning(
+      <>
+        O campo está vázio!
+        <br />
+        Digite um CEP no campo acima para buscar informações.
+      </>,
+    );
+
   console.log(adressData?.erro);
   console.log(adressData);
 
+  async function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
+    const response = await zipCodeSearch(zipCodeInput, () => {
+      setErrorSearch(errorSearch);
+      if (zipCodeInput.length === 0) {
+        notifyWarning();
+      } else {
+        notifyError();
+      }
+    });
+
+    if (response) {
+      setAdressdata(response);
+    }
+  }
+
   return (
     <div className="background_image">
+      <ToastContainer
+        position="bottom-right"
+        theme="colored"
+        toastClassName="toast-error"
+        progressClassName="toast-bar-progress-error"
+      />
+      <ToastContainer
+        position="bottom-right"
+        theme="colored"
+        toastClassName="toast-warning-warning"
+        progressClassName="toast-bar-progress-warning"
+      />
+
       <SearchContainer>
         <img
           className="map-search_image"
@@ -40,8 +88,7 @@ function App() {
         >
           Buscar CEP
         </Typography>
-
-        <Flex gap="0.5rem" style={{ width: "100%", padding: "0 2rem" }}>
+        <form className="search-content" onSubmit={handleSubmit}>
           <Input
             type="text"
             placeholder="Digite o CEP"
@@ -60,20 +107,8 @@ function App() {
             }}
           />
 
-          <Button
-            onClick={async () => {
-              const response = await zipCodeSearch(zipCodeInput, () => {
-                setErrorSearch(errorSearch);
-              });
-
-              if (response) {
-                setAdressdata(response);
-              }
-            }}
-          >
-            Buscar
-          </Button>
-        </Flex>
+          <Button type="submit">Buscar</Button>
+        </form>
 
         <div className="dividing deshed-horizontal"></div>
         {adressData ? (
