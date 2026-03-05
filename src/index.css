@@ -6,7 +6,7 @@
 
 .background_image {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,22 +14,101 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  overflow-y: hidden !important;
+  padding: 2rem 0 0 0;
 }
 
-.dividing {
-  width: 100%;
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: #f5f5f5e8;
+  box-shadow: 10px 5px 80px 50px #f5f5f5;
+  border-radius: 3rem;
+
+  & > label {
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    & > :nth-child(1) {
+      font-size: 1.75rem;
+    }
+
+    & > :nth-child(2) {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    background-color: #f5f5f5c4;
+    box-shadow: 0 0 100px 5px #f5f5f5;
+    padding: 0rem;
+  }
 }
 
-.line {
-  border-top: 2px solid #5d5a9c32;
+.search-container {
+  width: 700px;
+  max-width: 100%;
+  height: fit-content;
+  background-color: rgba(230, 234, 240, 0.72);
+  border-radius: 1.25rem;
+  border: 2px solid #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
-.deshed-horizontal {
-  border-top: 2px dashed #f1e5ff;
+.search-content {
+  width: 700px;
+  max-width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafad5;
+  padding: 0.25rem 0.5rem 0.25rem 1rem;
+  border-radius: 1rem;
+  border: 2px solid #ffffff;
 }
 
-.deshed-vertically {
+.result-container {
+  width: 95%;
   height: 100%;
-  border-right: 2px dashed #f1e5ff !important;
+  border-radius: 1rem;
+  background-color: #fafafad5;
+  border: 2px solid #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.result-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: #d5d5d54b;
+  border-radius: 1rem 1rem 0 0;
+  border-bottom: 2px solid #ffffff;
+}
+
+.result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 1.25rem;
+
+  @media (max-width: 600px) {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0;
+  }
 }
