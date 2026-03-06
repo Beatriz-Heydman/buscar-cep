@@ -15,4 +15,8 @@ export const StyledInput = styled.input`
   &::placeholder {
     color: #757984;
   }
+
+  @media (max-width: 400px) {
+    font-size: 1rem;
+  }
 `;

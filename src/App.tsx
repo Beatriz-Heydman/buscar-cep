@@ -49,13 +49,13 @@ function App() {
       <>
         O campo está vázio!
         <br />
-        Digite um CEP no campo acima para buscar informações.
+        Digite um CEP para buscar informações.
       </>,
 
       {
         style: {
           fontFamily: "Poppins",
-          color: "#9c893a",
+          color: "#9d7e00",
           display: "flex",
           gap: "5px",
           lineHeight: "20px",
@@ -82,13 +82,13 @@ function App() {
 
   return (
     <div className="background_image">
-      <ToastContainer position="bottom-right" theme="light" />
+      <ToastContainer position="top-right" theme="light" />
 
       <Flex
         justifyContent="space-around"
         alignItems="center"
         direction="column"
-        gap="1.5rem"
+        gap="3rem"
         style={{ width: "90%", height: "100%" }}
       >
         <div className="title-container">
@@ -103,7 +103,7 @@ function App() {
         <div className="search-container">
           <form className="search-content" onSubmit={handleSubmit}>
             <Flex justifyContent="flex-start" alignItems="center">
-              <IoSearch size={34} color="#487dcb" />
+              <IoSearch className="icon-search" size={34} color="#487dcb" />
               <Input
                 inputMode="numeric"
                 placeholder="Digite o CEP desejado"
@@ -141,7 +141,11 @@ function App() {
               className="result-header"
               style={{ backgroundColor: "f3f4f7" }}
             >
-              <FaLocationDot size={20} color="#487dcb" />
+              <FaLocationDot
+                className="icon-location"
+                size={20}
+                color="#487dcb"
+              />
               <Typography color="#676d74" fontWeight="400" fontSize="1.125rem">
                 Resultados para:
               </Typography>
@@ -158,12 +162,13 @@ function App() {
               style={{ padding: "0 1rem 1rem 1rem" }}
             >
               <Flex
+                className="result-content"
                 direction="column"
                 justifyContent="center"
                 alignItems="flex-start"
                 gap="0.5rem"
               >
-                <div className="result">
+                <div className="result-item">
                   <Typography color="#464a50" fontWeight="600">
                     Rua:
                   </Typography>
@@ -172,7 +177,7 @@ function App() {
                   </Typography>
                 </div>
 
-                <div className="result">
+                <div className="result-item">
                   <Typography color="#464a50" fontWeight="600">
                     Bairro:
                   </Typography>
@@ -181,7 +186,7 @@ function App() {
                   </Typography>
                 </div>
 
-                <div className="result">
+                <div className="result-item">
                   <Typography color="#464a50" fontWeight="600">
                     Cidade:
                   </Typography>
@@ -190,7 +195,7 @@ function App() {
                   </Typography>
                 </div>
 
-                <div className="result">
+                <div className="result-item">
                   <Typography color="#464a50" fontWeight="600">
                     Estado:
                   </Typography>
@@ -201,7 +206,7 @@ function App() {
               </Flex>
 
               <Flex direction="column" gap="0.5rem" style={{ width: "100%" }}>
-                <Flex gap="0.5rem" style={{ width: "100%" }}>
+                <Flex className="full-address" gap="0.5rem" direction="row">
                   <Flex gap="0.5rem" style={{ width: "100%" }}>
                     <FaDotCircle color="#487dcb" size={18} />
                     <Typography
@@ -219,7 +224,7 @@ function App() {
                       {adressData?.cep}
                     </Typography>
                   </Flex>
-                  <Button style={{ width: "auto" }}>
+                  <Button>
                     <Typography
                       color="#e0e8f8"
                       fontWeight="400"
@@ -230,22 +235,15 @@ function App() {
                   </Button>
                 </Flex>
 
-                <Flex
-                  justifyContent="center"
-                  alignItems="center"
-                  gap="0.5rem"
-                  style={{ width: "100%" }}
-                >
-                  <Button>
-                    <Typography
-                      color="#e0e8f8"
-                      fontWeight="400"
-                      style={{ cursor: "pointer" }}
-                    >
-                      Abrir no Google Maps
-                    </Typography>
-                  </Button>
-                </Flex>
+                <Button className="button-google-maps">
+                  <Typography
+                    color="#e0e8f8"
+                    fontWeight="400"
+                    style={{ cursor: "pointer" }}
+                  >
+                    Abrir no Google Maps
+                  </Typography>
+                </Button>
               </Flex>
             </Flex>
           </div>
