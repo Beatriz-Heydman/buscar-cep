@@ -136,117 +136,159 @@ function App() {
             </Button>
           </form>
 
-          <div className="result-container">
-            <div
-              className="result-header"
-              style={{ backgroundColor: "f3f4f7" }}
-            >
-              <FaLocationDot
-                className="icon-location"
-                size={20}
-                color="#487dcb"
-              />
-              <Typography color="#676d74" fontWeight="400" fontSize="1.125rem">
-                Resultados para:
-              </Typography>
-              <Typography color="#464a50" fontWeight="600" fontSize="1.125rem">
-                {adressData?.cep}
-              </Typography>
-            </div>
+          {adressData ? (
+            <div className="result-container">
+              <div
+                className="result-header"
+                style={{ backgroundColor: "f3f4f7" }}
+              >
+                <FaLocationDot
+                  className="icon-location"
+                  size={20}
+                  color="#487dcb"
+                />
+                <Typography
+                  color="#676d74"
+                  fontWeight="400"
+                  fontSize="1.125rem"
+                >
+                  Resultados para:
+                </Typography>
+                <Typography
+                  color="#464a50"
+                  fontWeight="600"
+                  fontSize="1.125rem"
+                >
+                  {adressData?.cep}
+                </Typography>
+              </div>
 
-            <Flex
-              direction="column"
-              justifyContent="center"
-              alignItems="flex-start"
-              gap="1rem"
-              style={{ padding: "0 1rem 1rem 1rem" }}
-            >
               <Flex
-                className="result-content"
                 direction="column"
                 justifyContent="center"
                 alignItems="flex-start"
-                gap="0.5rem"
+                gap="1rem"
+                style={{ padding: "0 1rem 1rem 1rem" }}
               >
-                <div className="result-item">
-                  <Typography color="#464a50" fontWeight="600">
-                    Rua:
-                  </Typography>
-                  <Typography color="#676d74" fontWeight="400">
-                    {adressData?.logradouro}
-                  </Typography>
-                </div>
-
-                <div className="result-item">
-                  <Typography color="#464a50" fontWeight="600">
-                    Bairro:
-                  </Typography>
-                  <Typography color="#676d74" fontWeight="400">
-                    {adressData?.bairro}
-                  </Typography>
-                </div>
-
-                <div className="result-item">
-                  <Typography color="#464a50" fontWeight="600">
-                    Cidade:
-                  </Typography>
-                  <Typography color="#676d74" fontWeight="400">
-                    {adressData?.localidade}
-                  </Typography>
-                </div>
-
-                <div className="result-item">
-                  <Typography color="#464a50" fontWeight="600">
-                    Estado:
-                  </Typography>
-                  <Typography color="#676d74" fontWeight="400">
-                    {adressData?.uf}
-                  </Typography>
-                </div>
-              </Flex>
-
-              <Flex direction="column" gap="0.5rem" style={{ width: "100%" }}>
-                <Flex className="full-address" gap="0.5rem" direction="row">
-                  <Flex gap="0.5rem" style={{ width: "100%" }}>
-                    <FaDotCircle color="#487dcb" size={18} />
-                    <Typography
-                      color="#3f4349"
-                      fontWeight="600"
-                      style={{
-                        width: "100%",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
-                    >
-                      {adressData?.logradouro}, {adressData?.bairro},
-                      {adressData?.localidade}/{adressData?.uf} -
-                      {adressData?.cep}
+                <Flex
+                  className="result-content"
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="flex-start"
+                  gap="0.5rem"
+                >
+                  <div className="result-item">
+                    <Typography color="#464a50" fontWeight="600">
+                      Rua:
                     </Typography>
+                    <Typography color="#676d74" fontWeight="400">
+                      {adressData?.logradouro}
+                    </Typography>
+                  </div>
+
+                  <div className="result-item">
+                    <Typography color="#464a50" fontWeight="600">
+                      Bairro:
+                    </Typography>
+                    <Typography color="#676d74" fontWeight="400">
+                      {adressData?.bairro}
+                    </Typography>
+                  </div>
+
+                  <div className="result-item">
+                    <Typography color="#464a50" fontWeight="600">
+                      Cidade:
+                    </Typography>
+                    <Typography color="#676d74" fontWeight="400">
+                      {adressData?.localidade}
+                    </Typography>
+                  </div>
+
+                  <div className="result-item">
+                    <Typography color="#464a50" fontWeight="600">
+                      Estado:
+                    </Typography>
+                    <Typography color="#676d74" fontWeight="400">
+                      {adressData?.uf}
+                    </Typography>
+                  </div>
+                </Flex>
+
+                <Flex direction="column" gap="0.5rem" style={{ width: "100%" }}>
+                  <Flex className="full-address" gap="0.5rem" direction="row">
+                    <Flex gap="0.5rem" style={{ width: "100%" }}>
+                      <FaDotCircle color="#487dcb" size={18} />
+                      <Typography
+                        color="#3f4349"
+                        fontWeight="600"
+                        style={{
+                          width: "100%",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {adressData?.logradouro}, {adressData?.bairro},
+                        {adressData?.localidade}/{adressData?.uf} -
+                        {adressData?.cep}
+                      </Typography>
+                    </Flex>
+                    <Button>
+                      <Typography
+                        color="#e0e8f8"
+                        fontWeight="400"
+                        style={{ cursor: "pointer" }}
+                      >
+                        Copiar
+                      </Typography>
+                    </Button>
                   </Flex>
-                  <Button>
+
+                  <Button className="button-google-maps">
                     <Typography
                       color="#e0e8f8"
                       fontWeight="400"
                       style={{ cursor: "pointer" }}
                     >
-                      Copiar
+                      Abrir no Google Maps
                     </Typography>
                   </Button>
                 </Flex>
-
-                <Button className="button-google-maps">
-                  <Typography
-                    color="#e0e8f8"
-                    fontWeight="400"
-                    style={{ cursor: "pointer" }}
-                  >
-                    Abrir no Google Maps
-                  </Typography>
-                </Button>
+              </Flex>
+            </div>
+          ) : (
+            <Flex
+              className="result-container"
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              gap="1.5rem"
+              style={{ padding: "2.5rem 2rem" }}
+            >
+              <img
+                className="search-location_icon"
+                src="public/assets/icons/search-location-icon.png"
+                alt=""
+              />
+              <Flex
+                direction="column"
+                gap="0.5rem"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Typography
+                  fontSize="1.375rem"
+                  fontWeight="500"
+                  color="#445063"
+                >
+                  Seu resultado aparecerá aqui!
+                </Typography>
+                <Typography fontSize="1.05rem" fontWeight="400" color="#445063">
+                  Digite um CEP no campo acima para buscar informações.
+                </Typography>
               </Flex>
             </Flex>
-          </div>
+          )}
         </div>
       </Flex>
     </div>
