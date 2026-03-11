@@ -216,16 +216,24 @@ function App() {
 
                 <Flex direction="column" gap="0.5rem" style={{ width: "100%" }}>
                   <Flex className="full-address" gap="0.5rem" direction="row">
-                    <Flex gap="0.5rem" style={{ width: "100%" }}>
+                    <Flex
+                      gap="0.5rem"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      style={{
+                        width: "100%",
+                        overflow: "hidden",
+                      }}
+                    >
                       <FaDotCircle color="#487dcb" size={18} />
                       <Typography
                         color="#3f4349"
                         fontWeight="600"
                         style={{
                           width: "100%",
+                          textOverflow: "ellipsis",
                           whiteSpace: "nowrap",
                           overflow: "hidden",
-                          textOverflow: "ellipsis",
                         }}
                       >
                         {adressData?.logradouro}, {adressData?.bairro},
