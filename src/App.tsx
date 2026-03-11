@@ -82,7 +82,7 @@ function App() {
 
   return (
     <div className="background_image">
-      <ToastContainer position="top-right" theme="light" />
+      <ToastContainer position="top-right" theme="light" limit={1} />
 
       <Flex
         justifyContent="space-around"
