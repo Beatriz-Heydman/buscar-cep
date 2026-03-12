@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { IoSearch } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaDotCircle } from "react-icons/fa";
+import { LuCopy, LuCopyCheck } from "react-icons/lu";
 
 // Components
 import { Button } from "./components/button";
@@ -23,6 +24,8 @@ function App() {
 
   const [zipCodeInput, setZipCodeInput] = useState(""); //Guarda o valor digitado no input
 
+  const [hesCopied, setHesCopied] = useState(false);
+
   console.log({ adressData, zipCodeInput, isZipError });
 
   const notifyError = () =>
@@ -36,10 +39,11 @@ function App() {
       {
         style: {
           fontFamily: "Poppins",
-          color: "#b74c4c",
+          color: "#af8383",
           display: "flex",
           gap: "5px",
           lineHeight: "20px",
+          fontSize: "0.95rem",
         },
       },
     );
@@ -55,13 +59,23 @@ function App() {
       {
         style: {
           fontFamily: "Poppins",
-          color: "#9d7e00",
+          color: "#958f76",
           display: "flex",
           gap: "5px",
           lineHeight: "20px",
+          fontSize: "0.95rem",
         },
       },
     );
+
+  const notifyCopiedAdress = () =>
+    toast.success("Endereço copiado com sucesso!", {
+      style: {
+        fontFamily: "Poppins",
+        color: "#5a6d5c",
+        fontSize: "0.95rem",
+      },
+    });
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -241,14 +255,16 @@ function App() {
                         {adressData?.cep}
                       </Typography>
                     </Flex>
-                    <Button>
-                      <Typography
-                        color="#e0e8f8"
-                        fontWeight="400"
-                        style={{ cursor: "pointer" }}
-                      >
-                        Copiar
-                      </Typography>
+                    <Button
+                      type="button"
+                      title="Copiar"
+                      style={{ padding: " 0.5rem 0.75rem" }}
+                      onClick={() => {
+                        setHesCopied(true);
+                        notifyCopiedAdress();
+                      }}
+                    >
+                      {hesCopied ? <LuCopyCheck /> : <LuCopy />}
                     </Button>
                   </Flex>
 
