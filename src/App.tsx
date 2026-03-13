@@ -24,7 +24,7 @@ function App() {
 
   const [zipCodeInput, setZipCodeInput] = useState(""); //Guarda o valor digitado no input
 
-  const [hesCopied, setHesCopied] = useState(false);
+  const [hasCopied, setHasCopied] = useState(false);
 
   console.log({ adressData, zipCodeInput, isZipError });
 
@@ -94,6 +94,11 @@ function App() {
     }
   }
 
+  const fullAdress = `${adressData?.logradouro}, ${adressData?.bairro}, ${adressData?.localidade}/${adressData?.uf} - ${adressData?.cep}`;
+
+  const copyFullAdress = () => {
+    navigator.clipboard.writeText(fullAdress);
+  };
   return (
     <div className="background_image">
       <ToastContainer position="top-right" theme="light" limit={1} />
@@ -250,9 +255,7 @@ function App() {
                           overflow: "hidden",
                         }}
                       >
-                        {adressData?.logradouro}, {adressData?.bairro},
-                        {adressData?.localidade}/{adressData?.uf} -
-                        {adressData?.cep}
+                        {fullAdress}
                       </Typography>
                     </Flex>
                     <Button
@@ -260,11 +263,12 @@ function App() {
                       title="Copiar"
                       style={{ padding: " 0.5rem 0.75rem" }}
                       onClick={() => {
-                        setHesCopied(true);
+                        setHasCopied(true);
                         notifyCopiedAdress();
+                        copyFullAdress();
                       }}
                     >
-                      {hesCopied ? <LuCopyCheck /> : <LuCopy />}
+                      {hasCopied ? <LuCopyCheck /> : <LuCopy />}
                     </Button>
                   </Flex>
 
