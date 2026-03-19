@@ -26,6 +26,8 @@ function App() {
 
   const [hasCopied, setHasCopied] = useState(false);
 
+  // const DEBUG_ERROR = true; // Forçar um erro ao copiar o texto (é só para testar)
+
   console.log({ adressData, zipCodeInput, isZipError });
 
   const notifyError = () =>
@@ -68,14 +70,28 @@ function App() {
       },
     );
 
-  const notifyCopiedAdress = () =>
+  const notifySuccessCopiedAdress = () =>
     toast.success("Endereço copiado com sucesso!", {
       style: {
         fontFamily: "Poppins",
-        color: "#5a6d5c",
+        color: "#5a7d5b",
         fontSize: "0.95rem",
       },
+      autoClose: 4000,
     });
+
+  const notifyErrorCopiedAdress = () =>
+    toast.error(
+      "Não foi possível copiar o endereço. Tente novamente ou copie manualmente.",
+      {
+        style: {
+          fontFamily: "Poppins",
+          color: "#af8383",
+          fontSize: "0.95rem",
+        },
+        autoClose: 4000,
+      },
+    );
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -96,9 +112,25 @@ function App() {
 
   const fullAdress = `${adressData?.logradouro}, ${adressData?.bairro}, ${adressData?.localidade}/${adressData?.uf} - ${adressData?.cep}`;
 
-  const copyFullAdress = () => {
-    navigator.clipboard.writeText(fullAdress);
+  const copyFullAdress = async () => {
+    try {
+      // if (DEBUG_ERROR) {
+      //   throw new Error("Erro simulado");
+      // }
+
+      await navigator.clipboard.writeText(fullAdress);
+
+      setHasCopied(true);
+      notifySuccessCopiedAdress();
+
+      setTimeout(() => {
+        setHasCopied(false);
+      }, 3000);
+    } catch {
+      notifyErrorCopiedAdress();
+    }
   };
+
   return (
     <div className="background_image">
       <ToastContainer position="top-right" theme="light" limit={1} />
@@ -263,8 +295,6 @@ function App() {
                       title="Copiar"
                       style={{ padding: " 0.5rem 0.75rem" }}
                       onClick={() => {
-                        setHasCopied(true);
-                        notifyCopiedAdress();
                         copyFullAdress();
                       }}
                     >
