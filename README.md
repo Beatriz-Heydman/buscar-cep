@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# 🔎 Buscador de CEP
+Aplicação web desenvolvida para busca de endereços via CEP, integrando API externa, tratamento de erros com feedback visual e visualização da localização no mapa, com foco em organização de código e experiência do usuário.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 💡 Funcionalidades
+- Busca de endereço a partir do CEP
+- Consumo de API externa com dados em tempo real
+- Feedback de erro com notificações (toast)
+- Redirecionamento para visualização no Google Maps
+- Interface responsiva
+- Componentização da interface com React
+- Tipagem utilizando TypeScript
+- Atualização dinâmica dos dados com uso de hooks
+- Tratamento de estados (carregamento, sucesso e erro)
+- Validação básica do CEP antes da requisição
+- Indicador de carregamento durante a busca
+- Formatação automática do CEP
+  
 
-Currently, two official plugins are available:
+  ## 🛠️ Tecnologias e ferramentas
+- React
+- TypeScript
+- Vite
+- Hooks do React 
+- Styled Components / CSS
+- React Toastify
+- React Icons
+- API ViaCEP
+- Google Maps (redirecionamento por URL)
+- Yarn
+- Vercel
+- Axios (requisições HTTP)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Como rodar o projeto
 
-## React Compiler
+### Pré-requisitos
+ - Node.js instalado
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### Clone o repositório
+git clone https://github.com/meu-usuario/meu-repo.git
 
-## Expanding the ESLint configuration
+### Acesse a pasta do projeto
+cd meu projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Você pode utilizar o gerenciador de pacotes da sua preferência:
+```bash
+npm install -g yarn
+yarn dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash 
+npm install 
+npm run dev
 ```
+
+```bash 
+pnpm install
+pnpm dev 
+```
+
+## 📸 Preview
+
+## 🌐 Acessar projeto online
+https://meu-projeto.vercel.app
+
+
+
