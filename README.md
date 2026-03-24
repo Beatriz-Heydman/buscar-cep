@@ -13,7 +13,6 @@ Aplicação web desenvolvida para busca de endereços via CEP, integrando API ex
 - Tratamento de estados (carregamento, sucesso e erro)
 - Validação básica do CEP antes da requisição
 - Indicador de carregamento durante a busca
-- Limpeza automática do campo após busca (opcional)
 - Formatação automática do CEP
   
 
