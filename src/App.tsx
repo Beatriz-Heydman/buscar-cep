@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { IoSearch } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaDotCircle } from "react-icons/fa";
-import { LuCopy, LuCopyCheck } from "react-icons/lu";
+import { LuCopy, LuCopyCheck, LuArrowUpRight } from "react-icons/lu";
 
 // Components
 import { Button } from "./components/button";
@@ -130,6 +130,8 @@ function App() {
       notifyErrorCopiedAdress();
     }
   };
+
+  const urlGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAdress)}`;
 
   return (
     <div className="background_image">
@@ -302,15 +304,15 @@ function App() {
                     </Button>
                   </Flex>
 
-                  <Button className="button-google-maps">
-                    <Typography
-                      color="#e0e8f8"
-                      fontWeight="400"
-                      style={{ cursor: "pointer" }}
-                    >
-                      Abrir no Google Maps
-                    </Typography>
-                  </Button>
+                  <a
+                    href={urlGoogleMaps}
+                    className="link-google-maps"
+                    target="blank"
+                    rel="noopener noreferrer"
+                  >
+                    Abrir no Google Maps
+                    <LuArrowUpRight size={20} />
+                  </a>
                 </Flex>
               </Flex>
             </div>
