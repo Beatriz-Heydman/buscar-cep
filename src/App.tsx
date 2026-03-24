@@ -267,7 +267,7 @@ function App() {
                   </div>
                 </Flex>
 
-                <Flex direction="column" gap="0.5rem" style={{ width: "100%" }}>
+                <Flex direction="column" gap="1.5rem" style={{ width: "100%" }}>
                   <Flex className="full-address" gap="0.5rem" direction="row">
                     <Flex
                       gap="0.5rem"
@@ -323,7 +323,6 @@ function App() {
               justifyContent="center"
               alignItems="center"
               gap="1.5rem"
-              style={{ padding: "2.5rem 2rem" }}
             >
               <img
                 className="search-location_icon"
@@ -340,10 +339,16 @@ function App() {
                   fontSize="1.375rem"
                   fontWeight="500"
                   color="#445063"
+                  style={{ textAlign: "center" }}
                 >
                   Seu resultado aparecerá aqui!
                 </Typography>
-                <Typography fontSize="1.05rem" fontWeight="400" color="#445063">
+                <Typography
+                  fontSize="1.05rem"
+                  fontWeight="400"
+                  color="#445063"
+                  style={{ textAlign: "center" }}
+                >
                   Digite um CEP no campo acima para buscar informações.
                 </Typography>
               </Flex>
