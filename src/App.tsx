@@ -17,6 +17,7 @@ import { zipCodeSearch } from "./requests/get/get-zip";
 
 // Types
 import type { Adress } from "./requests/get/get-zip/types";
+import { Loading } from "./components/loading";
 
 function App() {
   const [adressData, setAdressdata] = useState<Adress>(); //Guarda o valor do retorno do endereço
@@ -28,7 +29,11 @@ function App() {
 
   // const DEBUG_ERROR = true; // Forçar um erro ao copiar o texto (é só para testar)
 
-  console.log({ adressData, zipCodeInput, isZipError });
+  const fullAdress = `${adressData?.logradouro}, ${adressData?.bairro}, ${adressData?.localidade}/${adressData?.uf} - ${adressData?.cep}`;
+
+  const [loading, setLoading] = useState(false);
+
+  console.log({ adressData, zipCodeInput, isZipError, loading });
 
   const notifyError = () =>
     toast.error(
@@ -95,22 +100,31 @@ function App() {
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    const response = await zipCodeSearch(zipCodeInput, () => {
-      setIsZipError(true);
+    setLoading(true);
 
-      if (zipCodeInput.length === 0) {
-        notifyWarning();
-      } else {
-        notifyError();
+    if (loading) return;
+
+    try {
+      const response = await zipCodeSearch(zipCodeInput, () => {
+        setIsZipError(true);
+
+        if (!zipCodeInput) {
+          notifyWarning();
+          return;
+        }
+        if (zipCodeInput.length > 1 || zipCodeInput.length < 9) {
+          notifyError();
+          return;
+        }
+      });
+
+      if (response && response.erro !== "true") {
+        setAdressdata(response);
       }
-    });
-
-    if (response && response.erro !== "true") {
-      setAdressdata(response);
+    } finally {
+      setLoading(false);
     }
   }
-
-  const fullAdress = `${adressData?.logradouro}, ${adressData?.bairro}, ${adressData?.localidade}/${adressData?.uf} - ${adressData?.cep}`;
 
   const copyFullAdress = async () => {
     try {
@@ -189,7 +203,7 @@ function App() {
             </Button>
           </form>
 
-          {adressData ? (
+          {adressData && loading ? (
             <div className="result-container">
               <div
                 className="result-header"
@@ -324,34 +338,40 @@ function App() {
               alignItems="center"
               gap="1.5rem"
             >
-              <img
-                className="search-location_icon"
-                src="public/assets/icons/search-location-icon.png"
-                alt=""
-              />
-              <Flex
-                direction="column"
-                gap="0.5rem"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Typography
-                  fontSize="1.375rem"
-                  fontWeight="500"
-                  color="#445063"
-                  style={{ textAlign: "center" }}
-                >
-                  Seu resultado aparecerá aqui!
-                </Typography>
-                <Typography
-                  fontSize="1.05rem"
-                  fontWeight="400"
-                  color="#445063"
-                  style={{ textAlign: "center" }}
-                >
-                  Digite um CEP no campo acima para buscar informações.
-                </Typography>
-              </Flex>
+              {loading ? (
+                <Loading />
+              ) : (
+                <Flex>
+                  <img
+                    className="search-location_icon"
+                    src="public/assets/icons/search-location-icon.png"
+                    alt=""
+                  />
+                  <Flex
+                    direction="column"
+                    gap="0.5rem"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <Typography
+                      fontSize="1.375rem"
+                      fontWeight="500"
+                      color="#445063"
+                      style={{ textAlign: "center" }}
+                    >
+                      Seu resultado aparecerá aqui!
+                    </Typography>
+                    <Typography
+                      fontSize="1.05rem"
+                      fontWeight="400"
+                      color="#445063"
+                      style={{ textAlign: "center" }}
+                    >
+                      Digite um CEP no campo acima para buscar informações.
+                    </Typography>
+                  </Flex>
+                </Flex>
+              )}
             </Flex>
           )}
         </div>
