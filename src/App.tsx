@@ -100,23 +100,26 @@ function App() {
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    setLoading(true);
-
     if (loading) return;
+
+    if (zipCodeInput.length === 0) {
+      notifyWarning();
+      return;
+    }
+    if (zipCodeInput.length !== 9) {
+      notifyError();
+      return;
+    }
+    if (adressData && zipCodeInput.length === 9) return;
 
     try {
       const response = await zipCodeSearch(zipCodeInput, () => {
         setIsZipError(true);
-
-        if (!zipCodeInput) {
-          notifyWarning();
-          return;
-        }
-        if (zipCodeInput.length > 1 || zipCodeInput.length < 9) {
-          notifyError();
-          return;
-        }
       });
+
+      if (!zipCodeInput) {
+        notifyError();
+      }
 
       if (response && response.erro !== "true") {
         setAdressdata(response);
@@ -203,7 +206,7 @@ function App() {
             </Button>
           </form>
 
-          {adressData && loading ? (
+          {adressData ? (
             <div className="result-container">
               <div
                 className="result-header"
@@ -336,12 +339,16 @@ function App() {
               direction="column"
               justifyContent="center"
               alignItems="center"
-              gap="1.5rem"
             >
               {loading ? (
                 <Loading />
               ) : (
-                <Flex>
+                <Flex
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  gap="1.5rem"
+                >
                   <img
                     className="search-location_icon"
                     src="public/assets/icons/search-location-icon.png"
