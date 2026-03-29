@@ -94,12 +94,9 @@
   border-radius: 1rem;
   background-color: #fafafad5;
   border: 2px solid #ffffff;
-  display: flex;
-  flex-direction: column;
-  padding: 2.5rem 2rem;
 
   @media (max-width: 400px) {
-    padding: 1rem;
+    padding: 2.5rem 1rem;
   }
 }
 
