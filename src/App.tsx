@@ -172,7 +172,12 @@ function App() {
 
         <div className="search-container">
           <form className="search-content" onSubmit={handleSubmit}>
-            <Flex justifyContent="flex-start" alignItems="center">
+            5
+            <Flex
+              justifyContent="flex-start"
+              alignItems="center"
+              style={{ width: "100%" }}
+            >
               <IoSearch className="icon-search" size={34} color="#487dcb" />
               <Input
                 inputMode="numeric"
