@@ -172,7 +172,6 @@ function App() {
 
         <div className="search-container">
           <form className="search-content" onSubmit={handleSubmit}>
-            5
             <Flex
               justifyContent="flex-start"
               alignItems="center"
