@@ -1,7 +1,6 @@
 // Libs
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { IoSearch } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaDotCircle } from "react-icons/fa";
 import { LuCopy, LuCopyCheck, LuArrowUpRight } from "react-icons/lu";
@@ -9,15 +8,16 @@ import { LuCopy, LuCopyCheck, LuArrowUpRight } from "react-icons/lu";
 // Components
 import { Button } from "./components/button";
 import { Flex } from "./components/flex";
-import { Input } from "./components/input";
 import { Typography } from "./components/typography";
+import { Loading } from "./components/loading";
+import { ResearchGroup } from "./components/research-group";
+import { CardSearchContainer } from "./components/card-search-container";
 
 // Requests
 import { zipCodeSearch } from "./requests/get/get-zip";
 
 // Types
 import type { Adress } from "./requests/get/get-zip/types";
-import { Loading } from "./components/loading";
 
 function App() {
   const [adressData, setAdressdata] = useState<Adress>(); //Guarda o valor do retorno do endereço
@@ -179,44 +179,25 @@ function App() {
           </Typography>
         </Flex>
 
-        <form className="search-content" onSubmit={handleSubmit}>
-          <Flex
-            justifyContent="flex-start"
-            alignItems="center"
-            style={{ width: "100%" }}
-          >
-            <IoSearch className="icon-search" size={34} color="#487dcb" />
-            <Input
-              inputMode="numeric"
-              placeholder="Digite o CEP desejado"
-              type="text"
-              maxLength={9}
-              onChange={(event) => {
-                setAdressdata(undefined);
+        <CardSearchContainer>
+          <ResearchGroup
+            onSubmit={handleSubmit}
+            onChange={(event) => {
+              setAdressdata(undefined);
 
-                const value = event?.currentTarget.value;
-                event.currentTarget.value = value.replace(/[^0-9&-]/g, "");
-                setZipCodeInput(value);
+              const value = event?.currentTarget.value;
+              event.currentTarget.value = value.replace(/[^0-9&-]/g, "");
+              setZipCodeInput(value);
 
-                if (value.length === 5) {
-                  event.currentTarget.value = value + "-";
-                }
-                if (value.slice(5) === "-") {
-                  event.currentTarget.value = value.replace("-", "");
-                }
-              }}
-            />
-          </Flex>
-          <Button type="submit">
-            <Typography
-              color="#e0e8f8"
-              fontWeight="400"
-              style={{ cursor: "pointer" }}
-            >
-              Buscar
-            </Typography>
-          </Button>
-        </form>
+              if (value.length === 5) {
+                event.currentTarget.value = value + "-";
+              }
+              if (value.slice(5) === "-") {
+                event.currentTarget.value = value.replace("-", "");
+              }
+            }}
+          />
+        </CardSearchContainer>
 
         {adressData ? (
           <div className="result-container">
