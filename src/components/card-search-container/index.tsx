@@ -1,6 +1,9 @@
 // Styles
 import { StyledCardSearchContainer } from "./styles";
 
-export function CardSearchContainer() {
-  return <StyledCardSearchContainer></StyledCardSearchContainer>;
+// Types
+import type { CardSearchContainerProps } from "./types";
+
+export function CardSearchContainer({ children }: CardSearchContainerProps) {
+  return <StyledCardSearchContainer>{children}</StyledCardSearchContainer>;
 }
