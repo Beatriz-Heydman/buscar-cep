@@ -1,12 +1,8 @@
 // Libs
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { FaLocationDot } from "react-icons/fa6";
-import { FaDotCircle } from "react-icons/fa";
-import { LuCopy, LuCopyCheck, LuArrowUpRight } from "react-icons/lu";
 
 // Components
-import { Button } from "./components/button";
 import { Flex } from "./components/flex";
 import { Typography } from "./components/typography";
 import { Loading } from "./components/loading";
@@ -18,6 +14,7 @@ import { zipCodeSearch } from "./requests/get/get-zip";
 
 // Types
 import type { Adress } from "./requests/get/get-zip/types";
+import { CardResultSearch } from "./components/card-result-search";
 
 function App() {
   const [adressData, setAdressdata] = useState<Adress>(); //Guarda o valor do retorno do endereço
@@ -197,175 +194,70 @@ function App() {
               }
             }}
           />
-        </CardSearchContainer>
 
-        {adressData ? (
-          <div className="result-container">
-            <div
-              className="result-header"
-              style={{ backgroundColor: "f3f4f7" }}
-            >
-              <FaLocationDot
-                className="icon-location"
-                size={20}
-                color="#487dcb"
-              />
-              <Typography color="#676d74" fontWeight="400" fontSize="1.125rem">
-                Resultados para:
-              </Typography>
-              <Typography color="#464a50" fontWeight="600" fontSize="1.125rem">
-                {adressData?.cep}
-              </Typography>
-            </div>
-
+          {adressData ? (
+            <CardResultSearch
+              cep={adressData.cep}
+              bairro={adressData.bairro}
+              logradouro={adressData.logradouro}
+              uf={adressData.uf}
+              localidade={adressData.localidade}
+              fullAdress={fullAdress}
+              hasCopied={hasCopied}
+              urlGoogleMaps={urlGoogleMaps}
+              onClick={() => {
+                copyFullAdress();
+              }}
+            />
+          ) : (
             <Flex
+              className="result-container"
               direction="column"
               justifyContent="center"
-              alignItems="flex-start"
-              gap="1rem"
-              style={{ padding: "0 1rem 1rem 1rem" }}
+              alignItems="center"
             >
-              <Flex
-                className="result-content"
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                gap="0.5rem"
-              >
-                <div className="result-item">
-                  <Typography color="#464a50" fontWeight="600">
-                    Rua:
-                  </Typography>
-                  <Typography color="#676d74" fontWeight="400">
-                    {adressData?.logradouro}
-                  </Typography>
-                </div>
-
-                <div className="result-item">
-                  <Typography color="#464a50" fontWeight="600">
-                    Bairro:
-                  </Typography>
-                  <Typography color="#676d74" fontWeight="400">
-                    {adressData?.bairro}
-                  </Typography>
-                </div>
-
-                <div className="result-item">
-                  <Typography color="#464a50" fontWeight="600">
-                    Cidade:
-                  </Typography>
-                  <Typography color="#676d74" fontWeight="400">
-                    {adressData?.localidade}
-                  </Typography>
-                </div>
-
-                <div className="result-item">
-                  <Typography color="#464a50" fontWeight="600">
-                    Estado:
-                  </Typography>
-                  <Typography color="#676d74" fontWeight="400">
-                    {adressData?.uf}
-                  </Typography>
-                </div>
-              </Flex>
-
-              <Flex direction="column" gap="1.5rem" style={{ width: "100%" }}>
-                <Flex className="full-address" gap="0.5rem" direction="row">
-                  <Flex
-                    gap="0.5rem"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    style={{
-                      width: "100%",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <FaDotCircle color="#487dcb" size={18} />
-                    <Typography
-                      color="#3f4349"
-                      fontWeight="600"
-                      style={{
-                        width: "100%",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                      }}
-                    >
-                      {fullAdress}
-                    </Typography>
-                  </Flex>
-                  <Button
-                    type="button"
-                    title="Copiar"
-                    style={{ padding: " 0.5rem 0.75rem" }}
-                    onClick={() => {
-                      copyFullAdress();
-                    }}
-                  >
-                    {hasCopied ? <LuCopyCheck /> : <LuCopy />}
-                  </Button>
-                </Flex>
-
-                <a
-                  href={urlGoogleMaps}
-                  className="link-google-maps"
-                  target="blank"
-                  rel="noopener noreferrer"
-                >
-                  Abrir no Google Maps
-                  <LuArrowUpRight size={20} />
-                </a>
-              </Flex>
-            </Flex>
-          </div>
-        ) : (
-          <Flex
-            className="result-container"
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            {loading ? (
-              <Loading />
-            ) : (
-              <Flex
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                gap="1.5rem"
-              >
-                <img
-                  className="search-location_icon"
-                  src="public/assets/icons/search-location-icon.png"
-                  alt=""
-                />
+              {loading ? (
+                <Loading />
+              ) : (
                 <Flex
                   direction="column"
-                  gap="0.5rem"
                   justifyContent="center"
                   alignItems="center"
+                  gap="1.5rem"
                 >
-                  <Typography
-                    fontSize="1.375rem"
-                    fontWeight="500"
-                    color="#445063"
-                    style={{ textAlign: "center" }}
+                  <img
+                    className="search-location_icon"
+                    src="public/assets/icons/search-location-icon.png"
+                    alt=""
+                  />
+                  <Flex
+                    direction="column"
+                    gap="0.5rem"
+                    justifyContent="center"
+                    alignItems="center"
                   >
-                    Seu resultado aparecerá aqui!
-                  </Typography>
-                  <Typography
-                    fontSize="1.05rem"
-                    fontWeight="400"
-                    color="#445063"
-                    style={{ textAlign: "center" }}
-                  >
-                    Digite um CEP no campo acima para buscar informações.
-                  </Typography>
+                    <Typography
+                      fontSize="1.375rem"
+                      fontWeight="500"
+                      color="#445063"
+                      style={{ textAlign: "center" }}
+                    >
+                      Seu resultado aparecerá aqui!
+                    </Typography>
+                    <Typography
+                      fontSize="1.05rem"
+                      fontWeight="400"
+                      color="#445063"
+                      style={{ textAlign: "center" }}
+                    >
+                      Digite um CEP no campo acima para buscar informações.
+                    </Typography>
+                  </Flex>
                 </Flex>
-              </Flex>
-            )}
-          </Flex>
-        )}
+              )}
+            </Flex>
+          )}
+        </CardSearchContainer>
       </Flex>
     </Flex>
   );
