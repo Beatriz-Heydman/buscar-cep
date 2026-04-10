@@ -3,18 +3,20 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 // Components
-import { Flex } from "./components/flex";
-import { Typography } from "./components/typography";
-import { Loading } from "./components/loading";
-import { ResearchGroup } from "./components/research-group";
-import { CardSearchContainer } from "./components/card-search-container";
+import {
+  Flex,
+  Typography,
+  Loading,
+  ResearchGroup,
+  CardSearchContainer,
+  CardResultSearch,
+} from "./components";
 
 // Requests
 import { zipCodeSearch } from "./requests/get/get-zip";
 
 // Types
 import type { Adress } from "./requests/get/get-zip/types";
-import { CardResultSearch } from "./components/card-result-search";
 
 function App() {
   const [adressData, setAdressdata] = useState<Adress>(); //Guarda o valor do retorno do endereço
@@ -24,7 +26,7 @@ function App() {
 
   const [hasCopied, setHasCopied] = useState(false);
 
-  // const DEBUG_ERROR = true; // Forçar um erro ao copiar o texto (é só para testar)
+  // const DEBUG_ERROR = true; // Forçar um erro ao copiar o texto para teste
 
   const fullAdress = `${adressData?.logradouro}, ${adressData?.bairro}, ${adressData?.localidade}/${adressData?.uf} - ${adressData?.cep}`;
 
