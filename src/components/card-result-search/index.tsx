@@ -1,12 +1,18 @@
-// Styles
+// Libs
 import { FaLocationDot } from "react-icons/fa6";
-import { StyledCardResultSearch } from "./styles";
-import { Typography } from "../typography";
-import type { CardResultSearchProps } from "./types";
-import { Flex } from "../flex";
 import { FaDotCircle } from "react-icons/fa";
-import { Button } from "../button";
 import { LuArrowUpRight, LuCopy, LuCopyCheck } from "react-icons/lu";
+
+// Components
+import { Typography } from "../typography";
+import { Flex } from "../flex";
+import { Button } from "../button";
+
+// Styles
+import { StyledCardResultSearch } from "./styles";
+
+// Types
+import type { CardResultSearchProps } from "./types";
 
 export function CardResultSearch({
   bairro,

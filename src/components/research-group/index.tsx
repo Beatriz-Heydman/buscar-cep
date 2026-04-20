@@ -1,9 +1,16 @@
-import { Input } from "../input";
-import { StyledResearchGroup } from "./styles";
+// Libs
 import { IoSearch } from "react-icons/io5";
-import type { ResearchGroupProps } from "./types";
+
+// Components
+import { Input } from "../input";
 import { Button } from "../button";
 import { Typography } from "../typography";
+
+// Styles
+import { StyledResearchGroup } from "./styles";
+
+// Types
+import type { ResearchGroupProps } from "./types";
 
 export function ResearchGroup({ onChange, onSubmit }: ResearchGroupProps) {
   return (
