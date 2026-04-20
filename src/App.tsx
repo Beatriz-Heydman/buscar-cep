@@ -10,6 +10,7 @@ import {
   ResearchGroup,
   CardSearchContainer,
   CardResultSearch,
+  WarningContent,
 } from "./components";
 
 // Requests
@@ -211,53 +212,10 @@ function App() {
                 copyFullAdress();
               }}
             />
+          ) : loading ? (
+            <Loading />
           ) : (
-            <Flex
-              className="result-container"
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-            >
-              {loading ? (
-                <Loading />
-              ) : (
-                <Flex
-                  direction="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  gap="1.5rem"
-                >
-                  <img
-                    className="search-location_icon"
-                    src="public/assets/icons/search-location-icon.png"
-                    alt=""
-                  />
-                  <Flex
-                    direction="column"
-                    gap="0.5rem"
-                    justifyContent="center"
-                    alignItems="center"
-                  >
-                    <Typography
-                      fontSize="1.375rem"
-                      fontWeight="500"
-                      color="#445063"
-                      style={{ textAlign: "center" }}
-                    >
-                      Seu resultado aparecerá aqui!
-                    </Typography>
-                    <Typography
-                      fontSize="1.05rem"
-                      fontWeight="400"
-                      color="#445063"
-                      style={{ textAlign: "center" }}
-                    >
-                      Digite um CEP no campo acima para buscar informações.
-                    </Typography>
-                  </Flex>
-                </Flex>
-              )}
-            </Flex>
+            <WarningContent />
           )}
         </CardSearchContainer>
       </Flex>

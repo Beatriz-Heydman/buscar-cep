@@ -6,3 +6,4 @@ export { Input } from "./input";
 export { Loading } from "./loading";
 export { ResearchGroup } from "./research-group";
 export { Typography } from "./typography";
+export { WarningContent } from "./warning-content";
