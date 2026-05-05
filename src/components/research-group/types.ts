@@ -1,7 +1,7 @@
 // Libs
-import type { ChangeEventHandler } from "react";
+import type { ChangeEventHandler, SubmitEventHandler } from "react";
 
 export type ResearchGroupProps = {
   onChange: ChangeEventHandler<HTMLInputElement>;
-  onSubmit: ChangeEventHandler<HTMLFormElement>;
+  onSubmit: SubmitEventHandler<HTMLFormElement>;
 };
