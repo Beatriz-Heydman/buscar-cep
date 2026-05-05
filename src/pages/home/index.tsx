@@ -28,14 +28,11 @@ import { CEP_LENGTH } from "./constants/cep";
 
 export function HomeView() {
   const [addressData, setAdressdata] = useState<Adress>(); //Guarda o valor do retorno do endereço
-
+  const [loading, setLoading] = useState(false);
+  const [hasCopied, setHasCopied] = useState(false);
   const [zipCodeInput, setZipCodeInput] = useState(""); //Guarda o valor digitado no input
 
-  const [hasCopied, setHasCopied] = useState(false);
-
   const fullAddress = formatAddress(addressData);
-
-  const [loading, setLoading] = useState(false);
 
   async function fetchCEP(cep = "") {
     if (loading) return;
@@ -75,8 +72,6 @@ export function HomeView() {
     }
   }
 
-  const urlGoogleMaps = formatGoogleURLMaps(fullAddress);
-
   function onSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -93,6 +88,8 @@ export function HomeView() {
 
     fetchCEP(zipCodeInput);
   }
+
+  const urlGoogleMaps = formatGoogleURLMaps(fullAddress);
 
   useEffect(() => {
     const params = window.location.search;
