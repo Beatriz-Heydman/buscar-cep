@@ -8,11 +8,8 @@ export const StyledCardResultSearch = styled.div`
   background-color: #fafafad5;
   border: 2px solid #ffffff;
 
-  @media (max-width: 400px) {
-    padding: 2.5rem 1rem;
-  }
 
-  .result-header {
+  .result-header { 
     display: flex;
     justify-content: flex-start;
     align-items: center;
