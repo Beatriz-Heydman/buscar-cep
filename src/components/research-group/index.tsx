@@ -5,6 +5,7 @@ import { IoSearch } from "react-icons/io5";
 import { Input } from "../input";
 import { Button } from "../button";
 import { Typography } from "../typography";
+import { Flex } from "../flex";
 
 // Styles
 import { StyledResearchGroup } from "./styles";
@@ -15,6 +16,7 @@ import type { ResearchGroupProps } from "./types";
 export function ResearchGroup({ onChange, onSubmit }: ResearchGroupProps) {
   return (
     <StyledResearchGroup onSubmit={onSubmit}>
+      <Flex>
       <IoSearch className="icon-search" size={34} color="#487dcb" />
       <Input
         inputMode="numeric"
@@ -22,7 +24,9 @@ export function ResearchGroup({ onChange, onSubmit }: ResearchGroupProps) {
         type="text"
         maxLength={9}
         onChange={onChange}
-      />
+        autoComplete="postal-code"
+        />
+        </Flex>
 
       <Button type="submit">
         <Typography
