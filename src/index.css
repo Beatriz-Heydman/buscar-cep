@@ -7,7 +7,7 @@
 .background_image {
   width: 100%;
   min-height: 100vh;
-  background-image: url("public/assets/images/background-image.png");
+  background-image: url("/assets/images/background-image.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

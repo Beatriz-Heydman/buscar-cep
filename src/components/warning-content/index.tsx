@@ -10,8 +10,8 @@ export function WarningContent() {
     <StyledWarningContent>
       <img
         className="search-location_icon"
-        src="public/assets/icons/search-location-icon.png"
-        alt=""
+        src="/assets/icons/search-location-icon.png"
+        alt="Ícone de globo com marcadores de localização"
       />
 
       <Flex
