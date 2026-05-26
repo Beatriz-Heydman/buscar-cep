@@ -30,33 +30,6 @@ Aplicação web desenvolvida para busca de endereços via CEP, integrando API ex
 - Vercel
 - Axios (requisições HTTP)
 
-## 🚀 Como rodar o projeto
-
-### Pré-requisitos
- - Node.js instalado
-
-### Clone o repositório
-git clone https://github.com/meu-usuario/meu-repo.git
-
-### Acesse a pasta do projeto
-cd meu projeto
-
-### Você pode utilizar o gerenciador de pacotes da sua preferência:
-```bash
-npm install -g yarn
-yarn dev
-```
-
-```bash 
-npm install 
-npm run dev
-```
-
-```bash 
-pnpm install
-pnpm dev 
-```
-
 ## 📸 Preview
 
 ## 🌐 Acessar projeto online
