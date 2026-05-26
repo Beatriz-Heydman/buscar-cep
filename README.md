@@ -31,6 +31,8 @@ Aplicação web desenvolvida para busca de endereços via CEP, integrando API ex
 - Axios (requisições HTTP)
 
 ## 📸 Preview
+<img width="1916" height="902" alt="image" src="https://github.com/user-attachments/assets/cb15580e-e006-4d4b-ac03-ecef548b332c" />
+
 
 ## 🌐 Acessar projeto online
 https://meu-projeto.vercel.app
