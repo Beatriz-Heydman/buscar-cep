@@ -35,7 +35,7 @@ Aplicação web desenvolvida para busca de endereços via CEP, integrando API ex
 
 
 ## 🌐 Acessar projeto online
-https://meu-projeto.vercel.app
+https://buscar-cep-snowy.vercel.app/
 
 
 
